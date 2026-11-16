@@ -14,6 +14,12 @@ When running Dolphin outside of a full KDE Plasma session:
 3. `KItemListView` does not receive `QEvent::PaletteChange` events from Qt when theme changes occur, and inherits an uninitialized default Qt palette (`#000000` black text).
 4. As a result, file and folder names appear as **black text on a dark background**, making them completely unreadable.
 
+## Preview
+
+| Before | After |
+| :---: | :---: |
+| ![Before](assets/before.png) | ![After](assets/after.png) |
+
 ## The Solution
 
 This lightweight C shim intercepts:
@@ -64,6 +70,12 @@ export DOLPHIN_SUBTEXT_COLOR="#a0a0a0"    # Secondary text color (default: #afb3
 ### В чём была проблема?
 
 Dolphin отрисовывает список файлов через `QGraphicsScene`. При работе вне Plasma движок `KItemListView` не получает сигнал смены темы от Qt и остаётся со стандартной светлой палитрой (чёрный текст `#000000`). При этом фон папок уже тёмный. Итог — чёрный текст на тёмно-сером фоне.
+
+### Сравнение До и После
+
+| До исправления | После исправления |
+| :---: | :---: |
+| ![До](assets/before.png) | ![После](assets/after.png) |
 
 ### Установка
 
